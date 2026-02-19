@@ -1,14 +1,12 @@
----@class Starlight_Frame : DFrame
-Starlight.Frame = {}
+---@class Starlight_Frame : StarlightBaseObject, DFrame
+Starlight.Frame = Starlight.Class.BaseObject:Copy()
 
 ---Starlight Frame 객체 정의
 function Starlight.Frame:Init()
-    self.title = "Frame"
-    self.variant = "light"
-    self._variants = { "light", "dark" }
-    self.titleOffset = 5
     self.baseclass = baseclass.Get("DFrame")
 
+    self.title = "Frame"
+    self.titleOffset = 5
     self.baseclass.SetTitle(self, "")
 
     self:SetSize(300, 300)
@@ -26,10 +24,9 @@ end
 ---@param height number 창 높이
 function Starlight.Frame:Paint(width, height)
     local borderRadius = Starlight.theme.shape.borderRadius
-
-    local backgroundColor = Starlight.theme.palette[self.variant].background.default
-    local headerColor = self.variant == "light" and HexToColor("#d3e3fd") or HexToColor("#1f2125")
-    local textColor = Starlight.theme.palette[self.variant].text.primary
+    local backgroundColor = Starlight.theme.palette[self.mode].background.default
+    local headerColor = self.mode == "light" and HexToColor("#d3e3fd") or HexToColor("#1f2125")
+    local textColor = Starlight.theme.palette[self.mode].text.primary
 
     draw.RoundedBox(borderRadius, 0, 0, width, height, backgroundColor)
     draw.RoundedBoxEx(borderRadius, 0, 0, width, 25, headerColor, true, true, false, false)
@@ -55,14 +52,14 @@ function Starlight.Frame:SetIcon(icon)
     end
 end
 
----Frame 색상 테마 설정
----@param variant "light"|"dark" 색상 테마
-function Starlight.Frame:SetVariant(variant)
-    if ! table.HasValue(self._variants, variant) then
+---Frame 테마 모드 설정
+---@param variant "light"|"dark" 테마 모드
+function Starlight.Frame:SetMode(variant)
+    if not table.HasValue(self._modes, variant) then
         error("Invalid variant: " .. variant)
         return
     end
-    self.variant = variant
+    self.mode = variant
 end
 
 -- Starlight Frame 객체 등록
