@@ -24,7 +24,6 @@ local function initServer(path)
 end
 
 initClient("client/theme")
-initClient("client/test")
 
 -- Base 클래스 로드
 initClient("client/base/baseObject")
@@ -33,3 +32,6 @@ initClient("client/base/coloredObject")
 -- 컴포넌트 로드
 initClient("client/component/frame")
 initClient("client/component/button")
+
+-- 테스트 UI (항상 마지막)
+initClient("client/test")
