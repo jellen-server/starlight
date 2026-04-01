@@ -75,8 +75,7 @@ end
 
 ---레이아웃 계산: 닫기 버튼 위치
 ---@param w number
----@param h number
-function Starlight.Frame:PerformLayout(w, h)
+function Starlight.Frame:PerformLayout(w)
     local margin = math.floor((self.headerHeight - 24) / 2)
     self._closeBtn:SetPos(w - 24 - margin, margin)
 end
